@@ -19,9 +19,27 @@ class Widget_class(base):
 
     # Relación uno-a-muchos con PropiedadDetallada (un widget tiene muchas propiedades)
     propiedades_detalladas = relationship(
-        "PropiedadDetallada",          
+        "PropiedadDetallada",          # la tabla a la que hace relacion   
         back_populates="widget",      
         cascade="all, delete-orphan"   # Elimina propiedades si el widget es eliminado
+    )
+
+    usos_comunes = relationship(
+        "UsoComun",
+        back_populates="widget",
+        cascade="all, delete-orphan"
+    )
+
+    constructores_comunes = relationship(
+        "ConstructorComun",
+        back_populates="widget",
+        cascade="all, delete-orphan"
+    )
+
+    widgets_relacionados = relationship(
+        "WidgetRelacionado",
+        back_populates="widget",
+        cascade="all, delete-orphan"
     )
 
 class PropiedadDetallada(base):## LISTO ##
@@ -52,6 +70,7 @@ class UsoComun(base):## LISTO ##
     id = Column(Integer, primary_key=True, index=True, nullable=False)
     descripcion = Column(Text, nullable=False)## LISTO ##
     widget_id = Column(Integer, ForeignKey("Widget_tab.id", ondelete="CASCADE"), nullable=False)  # Conecta con el id de la tabla Widget_tab
+    widget = relationship("Widget_class", back_populates="usos_comunes") 
 
 class ConstructorComun(base): ## LISTO ##
     """
@@ -62,6 +81,7 @@ class ConstructorComun(base): ## LISTO ##
     id = Column(Integer, primary_key=True, index=True, nullable=False)
     firma = Column(Text, nullable=False)
     widget_id = Column(Integer, ForeignKey("Widget_tab.id", ondelete="CASCADE"), nullable=False)  # Conecta con el id de la tabla Widget_tab
+    widget = relationship("Widget_class", back_populates="constructores_comunes")
 
 class WidgetRelacionado(base):
     """
@@ -72,6 +92,7 @@ class WidgetRelacionado(base):
     id = Column(Integer, primary_key=True, index=True, nullable=False)
     nombre = Column(Text, nullable=False)
     widget_id = Column(Integer, ForeignKey("Widget_tab.id", ondelete="CASCADE"), nullable=False)  # Conecta con el id de la tabla Widget_tab
+    widget = relationship("Widget_class", back_populates="widgets_relacionados")
 
 ##########################################################################################################
 # Explicacion de como se hizo el modelo despues esto se conecta con schemas.py
