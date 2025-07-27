@@ -23,18 +23,12 @@ Esta API está diseñada para brindar datos a una aplicación Flutter que enseñ
 
 ## Instala dependencias:
 
-- Copiar
-- Editar
 - pip install -r requirements.txt
 ## Ejecuta el servidor:
 
-- Copiar
-- Editar
 - uvicorn app:app --reload
 ## Estructura del proyecto
 - pgsql
-- Copiar
-- Editar
 .
 ├── app.py
 ├── config/
