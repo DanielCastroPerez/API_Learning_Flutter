@@ -14,7 +14,7 @@ class Widget_class(base):
     descripcion = Column(Text, nullable=False)
     cuando_no_usar = Column(Text, nullable=False)
     codigo = Column(Text, nullable=False)
-    imagen = Column(String(60), nullable=False)
+    imagen = Column(Text, nullable=False)
     ruta = Column(String(60), nullable=False)
 
     # Relación uno-a-muchos con PropiedadDetallada (un widget tiene muchas propiedades)
